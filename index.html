@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>кликер(пока что без банана)</title>
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0; min-height: 100vh;
+      display: grid; place-items: center;
+      background: black;
+      color: white;
+    }
+    .card {
+      width: min(520px, 92vw);
+      background: #111b33;
+      border: 1px solid #24325c;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    h1 { margin: 0 0 10px; font-size: 20px; font-weight: 700; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .stat {
+      padding: 10px 12px;
+      background: #0d152b;
+      border: 1px solid #24325c;
+      border-radius: 12px;
+      flex: 1;
+      min-width: 200px;
+    }
+
+
+    .big {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      margin-top: 6px;
+    }
+
+
+    button {
+      cursor: pointer;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 16px;
+      font-weight: 700;
+      color: rgb(22, 33, 49);
+      background: linear-gradient(135deg, #7dffc7, #2d5c8f);
+      transition: transform .05s ease, filter .15s ease;
+      user-select: none;
+    }
+
+
+    button:active {transform: translate(3px) scale(0.90)}
+    .secondary {
+    background: transparent;
+    color: red;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+
+  .hint { opacity: .8; font-size: 13px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+</html>
+  <div class="card">
+    <div class = "row">
+         <div>баллы</div>
+        <div id="score" class="big">0</div>
+      </div>
+      <div class="stat">
+        <div id="clicks" class="big">0</div>
+      </div>
+    </div>
+
+
+    <div class="row" style="margin-top: 14px;">
+      <button id="clickBtn" title="Клик!">КЛИК</button>
+      <button id="resetBtn" class="secondary" title="Сбросить прогресс">Сброс</button>
+    </div>
+
+
+     <script>
+    const KEY = "simple_clicker_v1";
+    const scoreEl = document.getElementById("score");
+    const clicksEl = document.getElementById("clicks");
+    const clickBtn = document.getElementById("clickBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    let state = { score: 0, clicks: 0 };
+    function load() {
+      try {
+        const raw = localStorage.getItem(KEY);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        if (typeof data?.score === "number" && typeof data?.clicks === "number") {
+          state = data;
+        }
+      } catch {}
+    }
+
+
+     function save() {
+      localStorage.setItem(KEY, JSON.stringify(state));
+    }
+    function render() {
+      scoreEl.textContent = state.score.toLocaleString("ru-RU");
+      clicksEl.textContent = state.clicks.toLocaleString("ru-RU");
+    }
+    function clickOnce() {
+      state.clicks += 1;
+      state.score += 1; // 1 очко за клик
+      render();
+      save();
+    }
