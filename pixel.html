@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pixel Clicker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Pixel Clicker</h1>
+      <div class="row row-between">
+        <div class="tiny">Клик по “пикселю” или пробел</div>
+        <button id="resetBtn" title="Сбросить прогресс">Сброс</button>
+      </div>
+      <div class="row row-center">
+        <button id="pixelBtn" class="pixelBtn" title="Клик!">PIXEL</button>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="label">Очки</div>
+          <div id="score" class="value">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">За клик</div>
+          <div id="perClick" class="value">1</div>
+        </div>
+        <div class="stat">
+          <div class="label">Автоклик (очков/сек)</div>
+          <div id="perSec" class="value">0</div>
+        </div>
+      </div>
+      <div class="hint">
+        Прогресс сохраняется
+      </div>
+    </div>
+    <div class="card shop">
+      <h2>Магазин</h2>
+      <div class="item">
+        <div>
+          <strong>Улучшение клика</strong>
+          <div class="desc">+1 к очкам за клик.</div>
+          <div class="tiny">Куплено: <span id="clickUpgCount">0</span></div>
+        </div>
+        <div class="right">
+          <div class="price">Цена: <span id="clickUpgPrice">10</span></div>
+          <button id="buyClickUpg" class="primary">Купить</button>
+        </div>
+      </div>
+      <div class="item">
+        <div>
+          <strong>Автокликер</strong>
+          <div class="desc">+1 очко в секунду (пассивный доход).</div>
+          <div class="tiny">Куплено: <span id="autoCount">0</span></div>
+        </div>
+        <div class="right">
+          <div class="price">Цена: <span id="autoPrice">25</span></div>
+          <button id="buyAuto" class="primary">Купить</button>
+        </div>
+      </div>
+    </div>
+    <!-- Достижения -->
+    <div class="card achievements">
+      <div class="achHead">
+        <h2>Достижения</h2>
+        <div class="tiny"><span id="achProgress">0/0</span></div>
+      </div>
+      <div id="achList" class="achList"></div>
+      <div class="hint">
+        Достижения
+      </div>
+    </div>
+  </div>
+  <div id="toast" class="toast" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
